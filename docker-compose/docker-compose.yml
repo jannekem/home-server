@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootroot
+    env_file:
+      - db.env
+
+  app:
+    image: nextcloud
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - nextcloud:/var/www/html
+    environment:
+      - MYSQL_HOST=db
+    env_file:
+      - db.env
+    depends_on:
+      - db
+
+volumes:
+  db:
+  nextcloud:
