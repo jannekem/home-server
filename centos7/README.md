@@ -29,20 +29,29 @@ Make sure that the data and backup disks are located on different physical hard 
 Click the newly created VM and click "Power on". The VM should boot from the CentOS .iso image. Select to install CentOS.
 
 Select the installation language. Next you will need to configure some settings:
+
 ![centos3](img/centos3.png)
 
 Change the Date & Time settings to your server location and switch the keyboard layout if it doesn't match your keyboard.
 
 Set the installation destination to the 40 GB virtual disk that we created earlier.
+
 ![centos4](img/centos4.png)
 
 Go to the Network & host name section and enable Ethernet from the switch. Change the host name to `nextcloud` and click apply. Under Ethernet click Configure, select the IPv4 Settings tab and change the method to `manual`. Add your desired IP address, netmask and gateway. Depending on your network you may need to select the address from a different range such as 192.168.0.x or 172.16.0.x. If you don't want to choose the address immediately you can change it later.
+
 ![centos9](img/centos9.png)
 
+In the `General` tab select the `Automatically connect to this network when it is available` checkbox.
+
+![centos12](img/centos12.png)
+
 After saving the settings should look similar to this:
+
 ![centos10](img/centos10.png)
 
 Click done and youre ready to install, click <key>Begin Installation</key> to start:
+
 ![centos6](img/centos6.png)
 
 During the installation create the root password and a user. Remember to give admin rights to your new user.
@@ -60,16 +69,16 @@ This will print out the network configuration. The output can be something like 
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
-    inet6 ::1/128 scope host 
+    inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
 2: ens192: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc mq state UP qlen 1000
     link/ether 00:0c:29:5f:fd:7f brd ff:ff:ff:ff:ff:ff
-    inet 192.168.1.90/24 brd 192.168.1.255 scope global dynamic ens192
-       valid_lft 85879sec preferred_lft 85879sec
-    inet6 fe80::885f:a458:1f7:e126/64 scope link 
+    inet 192.168.1.30/24 brd 192.168.1.255 scope global ens192
+       valid_lft forever preferred_lft forever
+    inet6 fe80::885f:a458:1f7:e126/64 scope link
        valid_lft forever preferred_lft forever
 ```
-The first entry is the local loopback interface and the second one is the actual outside connection. Check the ip address next to `inet` and remember it, in this case it is `192.168.1.90`.
+The first entry is the local loopback interface and the second one is the actual outside connection. Check the ip address next to `inet` and check that it is correct, in this case it is `192.168.1.30`. If the IP configuration doesn't show up correctly you may have forgotten something in the network configuration. Scroll down the page to the network configuration section to set up the network interface.
 
 The online console is not very pleasant to work with so let's close it and connect to the server through SSH. On Windows you can download PuTTY [http://www.putty.org/] and on Mac or Linux you can use the terminal app and type `ssh 192.168.1.90` (replace the ip address with the one from your server). Accept the certificate and type in your credentials. If you can't connect make sure that you are connected to the same network as the server.
 
