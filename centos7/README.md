@@ -240,4 +240,27 @@ Next, let's set up a static ip address to the server. This will prevent the ip a
 ```
 # sudo nmtui
 ```
+The following UI opens:
 
+![nmtui1](img/nmtui1.png)
+
+Select edit connection.
+
+![nmtui2](img/nmtui2.png)
+
+Select the existing Ethernet connection.
+
+![nmtui3](img/nmtui3.png)
+
+Change the IPv4 configuration to manual and add your desired IP address. Don't forget to add the netmask at the end of the address, for home routers you should typically use `/24` (255 possible addresses).
+
+![nmtui4](img/nmtui4.png)
+
+You can also set the server hostname so that you can easily differentiate on which machine you are logged when using SSH.
+
+Quit the program and restart networking:
+```
+# systemctl restart network.service 
+```
+
+You will lose connection to the server so you will have to make a new SSH connection to the new IP address. Notice how the prompt has changed to show the new hostname (`user@nextcloud`).
