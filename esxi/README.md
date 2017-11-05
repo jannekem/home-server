@@ -20,7 +20,7 @@ On Mac or Linux you can use for example Etcher [https://etcher.io/] or UNetbooti
 ## Installation
 Attach a monitor and keyboard to your server or log in to the remote management interface if your server has one.
 
-Plug the newly created installation USB drive to the server machine and power on. The server should boot to the ESXi installer. If the installation screen doesn't come up check that USB is highest on the boot order in BIOS. Some server machines have an additional USB port inside that you can use.
+Plug the newly created installation USB drive to the server machine and power on. The server should boot to the ESXi installer. If the installation screen doesn't come up check that USB is highest on the boot order in BIOS. Some servers have an additional USB port inside that you can use.
 
 The installer will load everything in memory so you can choose the same USB stick as the destination for the installation. Follow the instructions on the installer and create the root password.
 
