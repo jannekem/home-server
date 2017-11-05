@@ -236,3 +236,8 @@ For now the shell prompt has shown `user@localhost` for each line. To make it mo
 ```
 Now the command prompt should have the form `user@nextcloud`.
 
+Next, let's set up a static ip address to the server. This will prevent the ip address from changing so we can always use the same address to connect to the server. We'll use the `nmtui` program:
+```
+# sudo nmtui
+```
+
