@@ -28,9 +28,24 @@ Make sure that the data and backup disks are located on different physical hard 
 ## Installation
 Click the newly created VM and click "Power on". The VM should boot from the CentOS .iso image. Select to install CentOS.
 
-Select the installation language.
+Select the installation language. Next you will need to configure some settings:
+![centos3](img/centos3.png)
 
-Under System select the installation destination 
+Change the Date & Time settings to your server location and switch the keyboard layout if it doesn't match your keyboard.
+
+Set the installation destination to the 40 GB virtual disk that we created earlier.
+![centos4](img/centos4.png)
+
+Go to the Network & host name section and enable Ethernet from the switch. Change the host name to `nextcloud` and click apply. Under Ethernet click Configure, select the IPv4 Settings tab and change the method to `manual`. Add your desired IP address, netmask and gateway. Depending on your network you may need to select the address from a different range such as 192.168.0.x or 172.16.0.x. If you don't want to choose the address immediately you can change it later.
+![centos9](img/centos9.png)
+
+After saving the settings should look similar to this:
+![centos10](img/centos10.png)
+
+Click done and youre ready to install, click <key>Begin Installation</key> to start:
+![centos6](img/centos6.png)
+
+During the installation create the root password and a user. Remember to give admin rights to your new user.
 
 Reboot when prompted.
 
@@ -229,7 +244,9 @@ Check that mounting was successful:
 Both mounted folders should be listed here.
 
 ## Network configuration
-Next, let's set up a static ip address to the server. This will prevent the ip address from changing so we can always use the same address to connect to the server. We'll use the `nmtui` program:
+If you already configured networking how you like it during the installation then you can skip the rest of this page!
+
+If you didn't set a static IP address at the beginning here is how you can do it later. The benefit of using static addresses is that the ip address remains the same so we can always find the server from the same place. We'll use the `nmtui` program:
 ```
 # sudo nmtui
 ```
