@@ -23,7 +23,7 @@ On the Customize settings tab allocate the resources to the VM, here are some po
 - Hard disk data: Thin provision, 1.5 TB
 - Hard disk backup: Thin provision, 2 TB
 
-Click Next, verify that the settings are correct and click Finish.
+Make sure that the data and backup disks are located on different physical hard drives. Click Next, verify that the settings are correct and click Finish.
 
 ## Installation
 Click the newly created VM and click "Power on". The VM should boot from the CentOS .iso image. Select to install CentOS.
@@ -229,13 +229,6 @@ Check that mounting was successful:
 Both mounted folders should be listed here.
 
 ## Network configuration
-For now the shell prompt has shown `user@localhost` for each line. To make it more clear that we are on the Nextcloud server machine let's change the hostname to reflect this:
-```
-# sudo hostnamectl set-hostname nextcloud
-# sudo systemctl restart systemd-hostnamed
-```
-Now the command prompt should have the form `user@nextcloud`.
-
 Next, let's set up a static ip address to the server. This will prevent the ip address from changing so we can always use the same address to connect to the server. We'll use the `nmtui` program:
 ```
 # sudo nmtui
@@ -252,7 +245,7 @@ Select the existing Ethernet connection.
 
 ![nmtui3](img/nmtui3.png)
 
-Change the IPv4 configuration to manual and add your desired IP address. Don't forget to add the netmask at the end of the address, for home routers you should typically use `/24` (255 possible addresses).
+Change the IPv4 configuration to manual and add your desired IP address and correct gateway. Don't forget to add the netmask at the end of the address, for home routers you should typically use `/24` (255 possible addresses). The gateway is typically the first address of the IP address range, so for addresses in `192.168.1.xxx/24` the gateway should be `192.168.1.0`.
 
 ![nmtui4](img/nmtui4.png)
 
@@ -260,7 +253,9 @@ You can also set the server hostname so that you can easily differentiate on whi
 
 Quit the program and restart networking:
 ```
-# systemctl restart network.service 
+# sudo systemctl restart network.service 
 ```
 
 You will lose connection to the server so you will have to make a new SSH connection to the new IP address. Notice how the prompt has changed to show the new hostname (`user@nextcloud`).
+
+Now we have the server set up for installing Nextcloud!
