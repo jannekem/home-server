@@ -62,7 +62,16 @@ The online console is not very pleasant to work with so let's close it and conne
 Now that you can log in to the server let's make the required configurations.
 
 ### Text editor
-The 
+We will need a text editor to modify text files on the server. CentOS comes with the `vi` editor installed by default but we can install the `vim` editor
+```
+# sudo yum -y install vim
+```
+or `nano`:
+```
+# sudo yum -y install nano
+```
+Vim will be used by default in the rest of the tutorial, so you'll need to substitute it with your editor of choice if you chose something else.
+
 ### Open VMware Tools
 Next we install the Open VMware Tools so that we can see more detailed information on the vSphere Web Client about the state of the machine:
 ```
@@ -194,7 +203,7 @@ New we will create file systems for the partitions. We will be using the xfs for
 ```
 # sudo mkfs.xfs /dev/sdb1
 ```
-This will should take a minute or two. Repeat for `/dev/sdc1`.
+This will take a minute or two. Repeat for `/dev/sdc1`.
 
 #### Mount the partitions
 To mount the file systems we need to create new directories as mounting points and then use the `mount` command. We want to mount the smaller file system under `/mnt/data` and the larger file system under `/mnt/backup`. Let's create the directories first:
@@ -204,17 +213,26 @@ To mount the file systems we need to create new directories as mounting points a
 ```
 Then write `sudo vim /etc/fstab` (or `sudo nano /etc/fstab` if you chose Nano as your editor) to open the `/etc/fstab` file for editing. This file is used by the system to mount file systems automatically. Add the following lines to the end of the file and save:
 ```
-/dev/sdb1		/mnt/data		xfs	defaults	0 0
-/dev/sdc1		/mnt/backup		xfs	defaults	0 0
+/dev/sdb1		/mnt/data		xfs	defaults	 0 0
+/dev/sdc1		/mnt/backup		xfs	defaults	 0 0
 ```
 Do an automatic mount with:
 ```
 # sudo mount -a
 ```
-Check that the mounting was successful:
+Check that mounting was successful:
 ```
 # mount | grep /mnt
 /dev/sdb1 on /mnt/data type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
 /dev/sdc1 on /mnt/backup type xfs (rw,relatime,seclabel,attr2,inode64,noquota)
 ```
 Both mounted folders should be listed here.
+
+## Network configuration
+For now the shell prompt has shown `user@localhost` for each line. To make it more clear that we are on the Nextcloud server machine let's change the hostname to reflect this:
+```
+# sudo hostnamectl set-hostname nextcloud
+# sudo systemctl restart systemd-hostnamed
+```
+Now the command prompt should have the form `user@nextcloud`.
+
