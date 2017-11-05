@@ -22,7 +22,7 @@ You will also need a 4 GB or larger USB stick that can be left on the server.
 If your server doesn't have a remote management system (iLO, RMM2, DRAC, etc.) you will also need a monitor and a keyboard for the initial installation.
 
 ## Overview
-1. Install ESXi
-2. Install CentOS 7
+1. [Install ESXi](/esxi/README.md)
+2. [Install CentOS 7](/centos7/README.md)
 3. Install Docker and docker-compose
 4. Install Nextcloud
